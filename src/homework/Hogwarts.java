@@ -1,6 +1,6 @@
 package homework;
 
-public class Hogwarts {
+public abstract class Hogwarts {
     private final String fullName; // Полное имя ученика
     private int magicPower; // Сила магии
     private int transgression; // Трансгрессия
