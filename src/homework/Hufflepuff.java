@@ -1,7 +1,7 @@
 package homework;
 
 // Пуффендуй
-public class Hufflepuff extends Hogwarts implements Comparable<Hufflepuff> {
+public class Hufflepuff extends Hogwarts {
     private int hardWork; // Трудолюбие
     private int loyalty; // Верность
     private int honesty; // Честность
@@ -37,21 +37,6 @@ public class Hufflepuff extends Hogwarts implements Comparable<Hufflepuff> {
         this.honesty = honesty;
     }
 
-    /**
-     * Сравнение студентов Пуффендуйя
-     *
-     * @param anotherStudent Студент
-     */
-    public void compareStudents(Hufflepuff anotherStudent) {
-        int resOfCompare = compareTo(anotherStudent);
-        if (resOfCompare > 0) {
-            System.out.println(getFullName() + " лучший Пуффендуйец, чем " + anotherStudent.getFullName());
-        } else if (resOfCompare < 0) {
-            System.out.println(anotherStudent.getFullName() + " лучший Пуффендуйец, чем " + getFullName());
-        } else {
-            System.out.println("Студенты равны");
-        }
-    }
 
     @Override
     public String toString() {
@@ -65,9 +50,24 @@ public class Hufflepuff extends Hogwarts implements Comparable<Hufflepuff> {
                 '}';
     }
 
+    /**
+     * Сравнение студентов Пуффендуйя
+     *
+     * @param anotherStudent Студент
+     */
     @Override
-    public int compareTo(Hufflepuff o) {
-        return Integer.compare(hardWork + loyalty + honesty, o.hardWork + o.loyalty + o.honesty);
+    public void compareStudentsFromTheSameFaculty(Hogwarts anotherStudent) {
+        if (anotherStudent != null && anotherStudent.getClass() == this.getClass()) {
+            Hufflepuff hufflepuffStudent = (Hufflepuff) anotherStudent;
+            int resOfCompare = Integer.compare(hardWork + loyalty + honesty,
+                    hufflepuffStudent.hardWork + hufflepuffStudent.loyalty + hufflepuffStudent.honesty);
+            if (resOfCompare > 0) {
+                System.out.println(getFullName() + " лучший Пуффендуйец, чем " + hufflepuffStudent.getFullName());
+            } else if (resOfCompare < 0) {
+                System.out.println(hufflepuffStudent.getFullName() + " лучший Пуффендуйец, чем " + getFullName());
+            } else {
+                System.out.println("Студенты равны");
+            }
+        }
     }
-
 }

@@ -1,7 +1,7 @@
 package homework;
 
 // Гриффиндор
-public class Gryffindor extends Hogwarts implements Comparable<Gryffindor> {
+public class Gryffindor extends Hogwarts {
     private int nobility; // Благородство
     private int honor; // Честь
     private int bravery; // Храбрость
@@ -38,22 +38,6 @@ public class Gryffindor extends Hogwarts implements Comparable<Gryffindor> {
         this.bravery = bravery;
     }
 
-    /**
-     * Сравнение студентов Гриффиндора
-     *
-     * @param anotherStudent Студент
-     */
-    public void compareStudents(Gryffindor anotherStudent) {
-        int resOfCompare = compareTo(anotherStudent);
-        if (resOfCompare > 0) {
-            System.out.println(getFullName() + " лучший Гриффиндорец, чем " + anotherStudent.getFullName());
-        } else if (resOfCompare < 0) {
-            System.out.println(anotherStudent.getFullName() + " лучший Гриффиндорец, чем " + getFullName());
-        } else {
-            System.out.println("Студенты равны");
-        }
-    }
-
     @Override
     public String toString() {
         return "Gryffindor{" +
@@ -66,8 +50,24 @@ public class Gryffindor extends Hogwarts implements Comparable<Gryffindor> {
                 '}';
     }
 
+    /**
+     * Сравнение студентов Гриффиндора
+     *
+     * @param anotherStudent Студент
+     */
     @Override
-    public int compareTo(Gryffindor o) {
-        return Integer.compare(nobility + honor + bravery, o.nobility + o.honor + o.bravery);
+    public void compareStudentsFromTheSameFaculty(Hogwarts anotherStudent) {
+        if (anotherStudent != null && anotherStudent.getClass() == this.getClass()) {
+            Gryffindor gryffindorStudent = (Gryffindor) anotherStudent;
+            int resOfCompare = Integer.compare(nobility + honor + bravery,
+                    gryffindorStudent.nobility + gryffindorStudent.honor + gryffindorStudent.bravery);
+            if (resOfCompare > 0) {
+                System.out.println(getFullName() + " лучший Гриффиндорец, чем " + gryffindorStudent.getFullName());
+            } else if (resOfCompare < 0) {
+                System.out.println(gryffindorStudent.getFullName() + " лучший Гриффиндорец, чем " + getFullName());
+            } else {
+                System.out.println("Студенты равны");
+            }
+        }
     }
 }

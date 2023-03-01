@@ -1,7 +1,7 @@
 package homework;
 
 // Слизерин
-public class Slytherin extends Hogwarts implements Comparable<Slytherin> {
+public class Slytherin extends Hogwarts {
     private int trick; // Хитрость
     private int determination; // Решительность
     private int ambition; // Амбициозность
@@ -59,23 +59,6 @@ public class Slytherin extends Hogwarts implements Comparable<Slytherin> {
         this.lustForPower = lustForPower;
     }
 
-
-    /**
-     * Сравнение студентов Слизерина
-     *
-     * @param anotherStudent Студент
-     */
-    public void compareStudents(Slytherin anotherStudent) {
-        int resOfCompare = compareTo(anotherStudent);
-        if (resOfCompare > 0) {
-            System.out.println(getFullName() + " лучший Слизеринец, чем " + anotherStudent.getFullName());
-        } else if (resOfCompare < 0) {
-            System.out.println(anotherStudent.getFullName() + " лучший Слизеринец, чем " + getFullName());
-        } else {
-            System.out.println("Студенты равны");
-        }
-    }
-
     @Override
     public String toString() {
         return "Slytherin{" +
@@ -90,9 +73,24 @@ public class Slytherin extends Hogwarts implements Comparable<Slytherin> {
                 '}';
     }
 
+    /**
+     * Сравнение студентов Слизерина
+     *
+     * @param anotherStudent Студент
+     */
     @Override
-    public int compareTo(Slytherin o) {
-        return Integer.compare(trick + determination + ambition + ingenuity + lustForPower,
-                o.trick + o.determination + o.ambition + o.ingenuity + o.lustForPower);
+    public void compareStudentsFromTheSameFaculty(Hogwarts anotherStudent) {
+        if (anotherStudent != null && anotherStudent.getClass() == this.getClass()) {
+            Slytherin slytherinStudent = (Slytherin) anotherStudent;
+            int resOfCompare = Integer.compare(trick + determination + ambition + ingenuity + lustForPower,
+                    slytherinStudent.trick + slytherinStudent.determination + slytherinStudent.ambition + slytherinStudent.ingenuity + slytherinStudent.lustForPower);
+            if (resOfCompare > 0) {
+                System.out.println(getFullName() + " лучший Слизеринец, чем " + slytherinStudent.getFullName());
+            } else if (resOfCompare < 0) {
+                System.out.println(slytherinStudent.getFullName() + " лучший Слизеринец, чем " + getFullName());
+            } else {
+                System.out.println("Студенты равны");
+            }
+        }
     }
 }

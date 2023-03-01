@@ -1,7 +1,7 @@
 package homework;
 
 // Когтевран
-public class Ravenclaw extends Hogwarts implements Comparable<Ravenclaw> {
+public class Ravenclaw extends Hogwarts {
     private int clever; // Интеллект
     private int wisdom; // Мудрость
     private int wit; // Остроумность
@@ -48,23 +48,6 @@ public class Ravenclaw extends Hogwarts implements Comparable<Ravenclaw> {
         this.creativity = creativity;
     }
 
-
-    /**
-     * Сравнение студентов Когтеврана
-     *
-     * @param anotherStudent Студент
-     */
-    public void compareStudents(Ravenclaw anotherStudent) {
-        int resOfCompare = compareTo(anotherStudent);
-        if (resOfCompare > 0) {
-            System.out.println(getFullName() + " лучший Когтевранец, чем " + anotherStudent.getFullName());
-        } else if (resOfCompare < 0) {
-            System.out.println(anotherStudent.getFullName() + " лучший Когтевранец, чем " + getFullName());
-        } else {
-            System.out.println("Студенты равны");
-        }
-    }
-
     @Override
     public String toString() {
         return "Ravenclaw{" +
@@ -78,8 +61,24 @@ public class Ravenclaw extends Hogwarts implements Comparable<Ravenclaw> {
                 '}';
     }
 
+    /**
+     * Сравнение студентов Когтеврана
+     *
+     * @param anotherStudent Студент
+     */
     @Override
-    public int compareTo(Ravenclaw o) {
-        return Integer.compare(clever + wisdom + wit + creativity, o.clever + o.wisdom + o.wisdom + o.creativity);
+    public void compareStudentsFromTheSameFaculty(Hogwarts anotherStudent) {
+        if (anotherStudent != null && anotherStudent.getClass() == this.getClass()) {
+            Ravenclaw ravenclawStudent = (Ravenclaw) anotherStudent;
+            int resOfCompare = Integer.compare(clever + wisdom + wit + creativity,
+                    ravenclawStudent.clever + ravenclawStudent.wisdom + ravenclawStudent.wit + ravenclawStudent.creativity);
+            if (resOfCompare > 0) {
+                System.out.println(getFullName() + " лучший Когтевранец, чем " + ravenclawStudent.getFullName());
+            } else if (resOfCompare < 0) {
+                System.out.println(ravenclawStudent.getFullName() + " лучший Когтевранец, чем " + getFullName());
+            } else {
+                System.out.println("Студенты равны");
+            }
+        }
     }
 }
